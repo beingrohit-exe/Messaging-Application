@@ -3,6 +3,8 @@ package com.messaging.application.dao;
 import com.messaging.application.document.ChatMessage;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
+import java.util.List;
+
 /**
  * Owner - Rohit Parihar
  * Author - rohit
@@ -13,4 +15,5 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
  */
 
 public interface ChatMessageRepository extends ElasticsearchRepository<ChatMessage, String> {
+    List<ChatMessage> findByChatId(String chatId);
 }
