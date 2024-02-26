@@ -1,7 +1,10 @@
 package com.messaging.application.dao;
 
 import com.messaging.application.document.User;
+import com.messaging.application.enums.Status;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+
+import java.util.List;
 
 /**
  * Owner - Rohit Parihar
@@ -13,4 +16,5 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
  */
 
 public interface UserRepository extends ElasticsearchRepository<User, String> {
+    List<User> findAllByStatus(Status status);
 }
