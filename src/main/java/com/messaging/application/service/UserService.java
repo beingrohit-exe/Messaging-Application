@@ -16,6 +16,6 @@ import java.util.List;
 public interface UserService {
 
     void saveUser(User user);
-    void disconnet(User user);
+    void disconnect(User user);
     List<User> findConnectedUsers();
 }
