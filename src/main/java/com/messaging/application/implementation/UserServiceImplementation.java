@@ -26,23 +26,19 @@ public class UserServiceImplementation implements UserService {
         this.userRepository = userRepository;
     }
 
-    @Override
     public void saveUser(User user) {
         user.setStatus(Status.ONLINE);
         userRepository.save(user);
     }
 
-    @Override
     public void disconnect(User user) {
-        User storedUser = userRepository.findById(user.getUserId())
-                .orElse(null);
-        if (storedUser!=null) {
+        var storedUser = userRepository.findById(user.getNickName()).orElse(null);
+        if (storedUser != null) {
             storedUser.setStatus(Status.OFFLINE);
             userRepository.save(storedUser);
         }
     }
 
-    @Override
     public List<User> findConnectedUsers() {
         return userRepository.findAllByStatus(Status.ONLINE);
     }

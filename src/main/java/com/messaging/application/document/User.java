@@ -25,7 +25,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 public class User {
 
     @Id
-    private String userId;
+    private String nickName;
     private String fullName;
     private Status status;
 }

@@ -38,16 +38,15 @@ public class ChatController {
 
     @MessageMapping("/chat")
     public void processMessage(@Payload ChatMessage chatMessage) {
-        ChatMessage savedMessage = chatMessageService.save(chatMessage);
+        ChatMessage savedMsg = chatMessageService.save(chatMessage);
         simpMessagingTemplate.convertAndSendToUser(
-                chatMessage.getRecipientId(),
-                "/queue/messages",
-                ChatNotification
-                        .builder()
-                        .id(savedMessage.getId())
-                        .senderId(savedMessage.getSenderId())
-                        .recipientId(savedMessage.getRecipientId())
-                        .content(savedMessage.getContent())
+                chatMessage.getRecipientId(), "/queue/messages",
+                new ChatNotification(
+                        savedMsg.getId(),
+                        savedMsg.getSenderId(),
+                        savedMsg.getRecipientId(),
+                        savedMsg.getContent()
+                )
         );
     }
 

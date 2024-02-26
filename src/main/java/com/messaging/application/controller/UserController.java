@@ -3,6 +3,7 @@ package com.messaging.application.controller;
 import com.messaging.application.document.User;
 import com.messaging.application.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -31,11 +32,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @MessageMapping("/user.addUser")
+    @MessageMapping("/user/addUser")
     @SendTo("/user/public")
     public User addUser(
             @Payload User user
     ) {
+        System.err.println(user.getFullName());
         userService.saveUser(user);
         return user;
     }
